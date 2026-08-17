@@ -1,6 +1,5 @@
-﻿# MATRICNO_IFT542 â€” Student Registration Web Application
+﻿# 2021/1/84514CF_IFT542 ” Student Registration Web Application
 
-> Replace `2021/1/84514cf` with the actual matriculation number before submission.
 
 ## Project overview
 
