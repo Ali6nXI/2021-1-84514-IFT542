@@ -1,0 +1,35 @@
+# Environment and secret files
+.env
+.env.*
+!.env.example
+config/local.php
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Private uploaded files
+uploads/
+storage/
+ift542_storage/
+private_uploads/
+
+# Database exports and temporary dumps
+*.sql.bak
+*.dump
+database/dumps/
+
+# Temporary test files
+tests/tmp/
+tests/evidence/invalid-upload.txt
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and temporary files
+.vscode/settings.json
+*.swp
+*.tmp

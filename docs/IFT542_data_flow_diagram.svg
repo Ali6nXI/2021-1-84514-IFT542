@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+  <title id="title">IFT542 Student Registration Application Data-Flow Diagram</title>
+  <desc id="desc">Level one data-flow diagram showing student and administrator browsers, PHP application processes, MariaDB, private document storage, a local mock URL target, and trust boundaries.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1f5f9b"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#24734d"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#a85d16"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.16"/>
+    </filter>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #172b4d; }
+      .subtitle { font: 14px Arial, sans-serif; fill: #42526e; }
+      .zone-title { font: 700 16px Arial, sans-serif; fill: #172b4d; }
+      .node-title { font: 700 15px Arial, sans-serif; fill: #172b4d; }
+      .node-text { font: 13px Arial, sans-serif; fill: #263238; }
+      .flow { font: 12px Arial, sans-serif; fill: #263238; }
+      .small { font: 11px Arial, sans-serif; fill: #5e6c84; }
+      .external { fill: #eaf3ff; stroke: #1f5f9b; stroke-width: 2; }
+      .process { fill: #eaf8f0; stroke: #24734d; stroke-width: 2; }
+      .store { fill: #fff3e6; stroke: #a85d16; stroke-width: 2; }
+      .planned { fill: #fff8e1; stroke: #b7791f; stroke-width: 2; stroke-dasharray: 7 5; }
+      .zone-external { fill: #f7fbff; stroke: #8ab4d8; stroke-width: 2; stroke-dasharray: 10 7; }
+      .zone-app { fill: #f7fcf8; stroke: #8fc6a8; stroke-width: 2; stroke-dasharray: 10 7; }
+      .zone-data { fill: #fffaf4; stroke: #e1ae78; stroke-width: 2; stroke-dasharray: 10 7; }
+      .boundary { stroke: #7b8794; stroke-width: 3; stroke-dasharray: 5 7; }
+      .flow-blue { stroke: #1f5f9b; stroke-width: 2; fill: none; marker-end: url(#arrowBlue); }
+      .flow-green { stroke: #24734d; stroke-width: 2; fill: none; marker-end: url(#arrowGreen); }
+      .flow-orange { stroke: #a85d16; stroke-width: 2; fill: none; marker-end: url(#arrowOrange); }
+      .legend-line { stroke-width: 3; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1500" height="900" fill="#ffffff"/>
+  <text x="45" y="45" class="title">IFT542 Student Registration Application — Level 1 Data-Flow Diagram</text>
+  <text x="45" y="70" class="subtitle">Local prototype baseline; all testing uses localhost and fictitious data. Dashed zone edges identify trust boundaries.</text>
+
+  <!-- Trust zones -->
+  <rect x="30" y="105" width="320" height="660" rx="12" class="zone-external"/>
+  <rect x="380" y="105" width="500" height="660" rx="12" class="zone-app"/>
+  <rect x="910" y="105" width="555" height="660" rx="12" class="zone-data"/>
+
+  <text x="50" y="135" class="zone-title">External actors / local test service</text>
+  <text x="400" y="135" class="zone-title">IFT542 PHP application</text>
+  <text x="930" y="135" class="zone-title">Data stores</text>
+
+  <!-- Boundary labels -->
+  <line x1="365" y1="105" x2="365" y2="765" class="boundary"/>
+  <line x1="895" y1="105" x2="895" y2="765" class="boundary"/>
+  <text x="355" y="465" transform="rotate(-90 355 465)" class="small">TB-1: Browser / local service ↔ PHP application — validate input, cookies, URLs and files</text>
+  <text x="885" y="465" transform="rotate(-90 885 465)" class="small">TB-2: PHP application ↔ database / file storage — least privilege and controlled access</text>
+
+  <!-- External entities -->
+  <rect x="70" y="175" width="235" height="82" rx="10" class="external" filter="url(#shadow)"/>
+  <text x="187" y="204" text-anchor="middle" class="node-title">E1 Student browser</text>
+  <text x="187" y="226" text-anchor="middle" class="node-text">Login, profile, courses,</text>
+  <text x="187" y="244" text-anchor="middle" class="node-text">registration and upload</text>
+
+  <rect x="70" y="335" width="235" height="82" rx="10" class="external" filter="url(#shadow)"/>
+  <text x="187" y="364" text-anchor="middle" class="node-title">E2 Administrator browser</text>
+  <text x="187" y="386" text-anchor="middle" class="node-text">Login, course management</text>
+  <text x="187" y="404" text-anchor="middle" class="node-text">and enrolment review</text>
+
+  <rect x="70" y="540" width="235" height="100" rx="10" class="planned" filter="url(#shadow)"/>
+  <text x="187" y="569" text-anchor="middle" class="node-title">E3 Local mock URL target</text>
+  <text x="187" y="591" text-anchor="middle" class="node-text">Fictitious localhost service</text>
+  <text x="187" y="609" text-anchor="middle" class="node-text">for the SSRF exercise</text>
+  <text x="187" y="628" text-anchor="middle" class="small">Planned; never use public targets</text>
+
+  <!-- Application processes -->
+  <rect x="425" y="170" width="215" height="92" rx="12" class="process" filter="url(#shadow)"/>
+  <text x="532" y="200" text-anchor="middle" class="node-title">P1 Authentication</text>
+  <text x="532" y="221" text-anchor="middle" class="node-text">Login, password verification,</text>
+  <text x="532" y="240" text-anchor="middle" class="node-text">session and role checks</text>
+
+  <rect x="425" y="320" width="215" height="110" rx="12" class="process" filter="url(#shadow)"/>
+  <text x="532" y="350" text-anchor="middle" class="node-title">P2 Student functions</text>
+  <text x="532" y="371" text-anchor="middle" class="node-text">Profile updates, course</text>
+  <text x="532" y="390" text-anchor="middle" class="node-text">registration and CSRF checks</text>
+  <text x="532" y="409" text-anchor="middle" class="node-text">Document-upload request</text>
+
+  <rect x="425" y="490" width="215" height="105" rx="12" class="process" filter="url(#shadow)"/>
+  <text x="532" y="520" text-anchor="middle" class="node-title">P3 Admin functions</text>
+  <text x="532" y="541" text-anchor="middle" class="node-text">Course creation and</text>
+  <text x="532" y="560" text-anchor="middle" class="node-text">enrolment review with</text>
+  <text x="532" y="579" text-anchor="middle" class="node-text">administrator authorization</text>
+
+  <rect x="680" y="320" width="165" height="110" rx="12" class="process" filter="url(#shadow)"/>
+  <text x="762" y="350" text-anchor="middle" class="node-title">P4 Upload handler</text>
+  <text x="762" y="371" text-anchor="middle" class="node-text">MIME, size and</text>
+  <text x="762" y="390" text-anchor="middle" class="node-text">random-name checks</text>
+  <text x="762" y="409" text-anchor="middle" class="node-text">before storage</text>
+
+  <rect x="680" y="500" width="165" height="105" rx="12" class="planned" filter="url(#shadow)"/>
+  <text x="762" y="530" text-anchor="middle" class="node-title">P5 URL preview</text>
+  <text x="762" y="551" text-anchor="middle" class="node-text">Allowlisted, local-only</text>
+  <text x="762" y="570" text-anchor="middle" class="node-text">destination validation</text>
+  <text x="762" y="589" text-anchor="middle" class="small">Planned SSRF control</text>
+
+  <!-- Data stores -->
+  <rect x="965" y="175" width="425" height="155" rx="14" class="store" filter="url(#shadow)"/>
+  <ellipse cx="1177" cy="175" rx="212" ry="18" fill="#fff3e6" stroke="#a85d16" stroke-width="2"/>
+  <text x="1177" y="208" text-anchor="middle" class="node-title">D1 MariaDB: ift542_app</text>
+  <text x="1177" y="233" text-anchor="middle" class="node-text">users — password hashes and roles</text>
+  <text x="1177" y="253" text-anchor="middle" class="node-text">courses — course catalogue and capacity</text>
+  <text x="1177" y="273" text-anchor="middle" class="node-text">enrolments — student/course records</text>
+  <text x="1177" y="293" text-anchor="middle" class="node-text">documents — upload metadata; audit_logs</text>
+
+  <rect x="965" y="435" width="425" height="125" rx="14" class="store" filter="url(#shadow)"/>
+  <text x="1177" y="470" text-anchor="middle" class="node-title">D2 Private document storage</text>
+  <text x="1177" y="494" text-anchor="middle" class="node-text">C:\xampp\ift542_storage</text>
+  <text x="1177" y="515" text-anchor="middle" class="node-text">Random stored names; outside htdocs</text>
+  <text x="1177" y="536" text-anchor="middle" class="node-text">PDF, JPG and PNG files only</text>
+
+  <!-- Flows: external to app -->
+  <path d="M305 205 C345 205 370 205 425 205" class="flow-blue"/>
+  <text x="318" y="192" class="flow">credentials / session requests</text>
+  <path d="M425 235 C370 235 345 235 305 235" class="flow-blue"/>
+  <text x="314" y="254" class="flow">login response / session cookie</text>
+
+  <path d="M305 365 C345 365 370 365 425 365" class="flow-blue"/>
+  <text x="317" y="351" class="flow">admin credentials / actions</text>
+  <path d="M425 395 C370 395 345 395 305 395" class="flow-blue"/>
+  <text x="319" y="414" class="flow">admin pages / results</text>
+
+  <!-- Internal flows -->
+  <path d="M640 215 C760 215 820 215 965 215" class="flow-green"/>
+  <text x="710" y="202" class="flow">account lookup / password hash</text>
+  <path d="M965 245 C820 245 760 245 640 245" class="flow-green"/>
+  <text x="725" y="264" class="flow">user role / account result</text>
+
+  <path d="M640 365 C770 365 835 365 965 365" class="flow-green"/>
+  <text x="700" y="351" class="flow">profile, course and enrolment data</text>
+  <path d="M965 395 C835 395 770 395 640 395" class="flow-green"/>
+  <text x="718" y="414" class="flow">validated records / status</text>
+
+  <path d="M640 535 C760 535 820 535 965 535" class="flow-green"/>
+  <text x="700" y="521" class="flow">course and enrolment administration</text>
+
+  <path d="M640 405 C655 405 665 405 680 405" class="flow-green"/>
+  <text x="642" y="394" class="flow">validated file</text>
+  <path d="M845 365 C900 365 920 365 965 365" class="flow-green"/>
+  <text x="852" y="351" class="flow">document metadata</text>
+  <path d="M845 430 C900 465 920 480 965 480" class="flow-green"/>
+  <text x="854" y="458" class="flow">random-name file</text>
+
+  <!-- Planned URL flow -->
+  <path d="M680 545 C565 600 455 600 305 590" class="flow-orange"/>
+  <text x="430" y="620" class="flow">allowlisted local URL request</text>
+  <path d="M305 620 C455 650 565 650 680 580" class="flow-orange"/>
+  <text x="440" y="675" class="flow">local response / preview data</text>
+
+  <!-- Logging note -->
+  <path d="M532 595 C620 700 760 700 965 300" class="flow-orange" stroke-dasharray="6 5"/>
+  <text x="650" y="710" class="flow">security events → D1.audit_logs (to be populated)</text>
+
+  <!-- Legend -->
+  <rect x="45" y="800" width="1410" height="70" rx="10" fill="#f8f9fa" stroke="#dfe1e6"/>
+  <text x="65" y="826" class="node-title">Legend</text>
+  <rect x="135" y="812" width="24" height="18" class="external"/>
+  <text x="168" y="826" class="small">External actor / local service</text>
+  <rect x="355" y="812" width="24" height="18" class="process"/>
+  <text x="388" y="826" class="small">Application process</text>
+  <rect x="545" y="812" width="24" height="18" class="store"/>
+  <text x="578" y="826" class="small">Data store</text>
+  <rect x="690" y="812" width="24" height="18" class="planned"/>
+  <text x="723" y="826" class="small">Planned/local-only feature</text>
+  <line x1="920" y1="821" x2="970" y2="821" class="boundary"/>
+  <text x="980" y="826" class="small">Trust boundary</text>
+  <text x="65" y="852" class="small">Controls to document: input validation, prepared SQL, session/role checks, CSRF tokens, upload allowlist, private storage, logging, and local-only SSRF allowlist.</text>
+</svg>
