@@ -283,14 +283,14 @@ The register records the affected asset or data flow, threat description, likeli
 
 | Priority | Risk ID | Risk | Initial risk | Residual risk |
 |---:|---|---|---:|---:|
-| 1 | S-01 | Spoofing of student or administrator accounts | 20 â€” Critical | 10 â€” High |
-| 2 | E-01 | Elevation of privilege from student to administrator | 20 â€” Critical | 5 â€” Medium |
-| 3 | T-02 | SQL injection affecting database flows | 20 â€” Critical | 5 â€” Medium |
-| 4 | T-01 | Tampering with profile or enrolment records | 16 â€” High | 4 â€” Low |
+| 1 | S-01 | Spoofing of student or administrator accounts | 20 â€” Critical | 10 - High |
+| 2 | E-01 | Elevation of privilege from student to administrator | 20 â€” Critical | 5 - Medium |
+| 3 | T-02 | SQL injection affecting database flows | 20 â€” Critical | 5 - Medium |
+| 4 | T-01 | Tampering with profile or enrolment records | 16 â€” High | 4 - Low |
 | 5 | M-01 | Security misconfiguration | 16 â€” High | 4 â€” Low |
-| 6 | I-01 | Unauthorized disclosure of documents or data | 15 â€” High | 5 â€” Medium |
-| 7 | I-03 | SSRF access to private or metadata services | 15 â€” High | 5 â€” Medium |
-| 8 | D-01 | Resource exhaustion through login or upload abuse | 12 â€” High | 8 â€” Medium |
+| 6 | I-01 | Unauthorized disclosure of documents or data | 15 â€” High | 5 - Medium |
+| 7 | I-03 | SSRF access to private or metadata services | 15 â€” High | 5 - Medium |
+| 8 | D-01 | Resource exhaustion through login or upload abuse | 12 â€” High | 8 - Medium |
 
 The first three risks have the same initial score of 20. They were ordered using the breadth of potential impact, privilege exposure, sensitivity of affected data, and consequences of control failure.
 
